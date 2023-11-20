@@ -8,15 +8,16 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 
 
 class SponsorForm(FlaskForm):
+    choices = [('money', 'Donated Money'), ('resources', 'Donated Resources')]
     sponsor_name = StringField('Sponsor Name', validators=[DataRequired()])
     donation_type = SelectField('Donation Type',
-                                choices=[('money', 'Donated Money'), ('resources', 'Donated Resources')],
+                                choices=choices,
                                 validators=[DataRequired()])
     donation_details = TextAreaField('Donation Details', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 
-@app.route('/add_sponsor', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def add_sponsor():
     form = SponsorForm()
 
